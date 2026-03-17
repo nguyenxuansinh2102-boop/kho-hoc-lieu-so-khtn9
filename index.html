@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kho Học Liệu Số KHTN 9 - Kết Nối Tri Thức</title>
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #f4f4f9;
+            --text-color: #333;
+            --active-color: #e74c3c;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* --- CSS CHO THANH TÌM KIẾM VÀ LỌC --- */
+        .controls-container {
+            max-width: 1200px;
+            margin: 20px auto 0;
+            padding: 0 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .search-bar {
+            flex: 1;
+            min-width: 250px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            border: 2px solid #ccc;
+            border-radius: 25px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .search-bar:focus {
+            border-color: var(--primary-color);
+        }
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px;
+            background-color: #ddd;
+            color: #333;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .filter-btn:hover {
+            background-color: #ccc;
+        }
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        /* ---------------------------------------- */
+
+        .container {
+            flex: 1;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            align-content: start;
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card h3 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .tag {
+            display: inline-block;
+            background: #e9ecef;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            color: #495057;
+            font-weight: bold;
+        }
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .btn {
+            text-decoration: none;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            transition: opacity 0.2s;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .btn-wayground { background-color: #8854c0; } 
+        .btn-info { background-color: #17a2b8; }
+        .btn-sim { background-color: #28a745; }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            margin-top: auto;
+        }
+        footer p {
+            margin: 5px 0;
+            font-size: 0.95rem;
+        }
+        .author-credit {
+            color: #f1c40f;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Kho Học Liệu Số KHTN 9</h1>
+        <p>Hỗ trợ học tập và ôn tập theo định hướng phát triển năng lực</p>
+    </header>
+
+    <div class="controls-container">
+        <input type="text" id="searchInput" class="search-bar" placeholder="🔍 Nhập tên bài học để tìm kiếm...">
+        <div class="filter-group">
+            <button class="filter-btn active" data-filter="all">Tất cả</button>
+            <button class="filter-btn" data-filter="Vật lí">Vật lí</button>
+            <button class="filter-btn" data-filter="Hóa học">Hóa học</button>
+            <button class="filter-btn" data-filter="Sinh học">Sinh học</button>
+        </div>
+    </div>
+
+    <div class="container" id="lessonContainer">
+        
+        <!-- THẺ BÀI HỌC VẬT LÍ 1 -->
+        <div class="card" data-category="Vật lí">
+            <h3>Chủ đề: Năng lượng và sự biến đổi</h3>
+            <span class="tag">Vật lí</span>
+            <p class="lesson-name"><strong>Bài: Định luật Ohm</strong></p>
+            <p>Các tài liệu ôn tập và trải nghiệm thực hành liên quan đến cường độ dòng điện và điện trở.</p>
+            <div class="btn-group">
+                <!-- XÓA DÒNG CHỮ DÁN_LINK_WAYGROUND_VÀO_ĐÂY VÀ DÁN ĐƯỜNG LINK CỦA BẠN VÀO -->
+                <a href="DÁN_LINK_WAYGROUND_VÀO_ĐÂY" target="_blank" class="btn btn-wayground">🎯 Bài tập tương tác</a>
+                
+                <!-- XÓA DÒNG CHỮ DÁN_LINK_PHET_COLORADO_VÀO_ĐÂY VÀ DÁN ĐƯỜNG LINK CỦA BẠN VÀO -->
+                <a href="DÁN_LINK_PHET_COLORADO_VÀO_ĐÂY" target="_blank" class="btn btn-sim">🔬 Mô phỏng thí nghiệm</a>
+            </div>
+        </div>
+
+        <!-- THẺ BÀI HỌC VẬT LÍ 2 -->
+        <div class="card" data-category="Vật lí">
+            <h3>Chủ đề: Ánh sáng</h3>
+            <span class="tag">Vật lí</span>
+            <p class="lesson-name"><strong>Bài: Thấu kính - Kính lúp</strong></p>
+            <p>Tài liệu trực quan giúp học sinh nhận biết đường truyền của tia sáng qua các loại thấu kính.</p>
+            <div class="btn-group">
+                <a href="DÁN_LINK_INFOGRAPHIC_VÀO_ĐÂY" target="_blank" class="btn btn-info">🖼️ Infographic Tổng hợp</a>
+                <a href="DÁN_LINK_TRÒ_CHƠI_VÀO_ĐÂY" target="_blank" class="btn btn-wayground">🎮 Trò chơi củng cố</a>
+            </div>
+        </div>
+        
+        <!-- THẺ BÀI HỌC HÓA HỌC -->
+        <div class="card" data-category="Hóa học">
+            <h3>Chủ đề: Chất và sự biến đổi của chất</h3>
+            <span class="tag">Hóa học</span>
+            <p class="lesson-name"><strong>Bài: Tính chất chung của kim loại</strong></p>
+            <p>Học liệu số trực quan về tính chất vật lí và hóa học cơ bản của các kim loại thường gặp.</p>
+            <div class="btn-group">
+                <a href="DÁN_LINK_QUIZ_VÀO_ĐÂY" target="_blank" class="btn btn-wayground">🎯 Quiz ôn tập kim loại</a>
+                <a href="DÁN_LINK_SƠ_ĐỒ_TƯ_DUY_VÀO_ĐÂY" target="_blank" class="btn btn-info">📊 Sơ đồ tư duy</a>
+            </div>
+        </div>
+
+        <!-- THẺ BÀI HỌC SINH HỌC -->
+        <div class="card" data-category="Sinh học">
+            <h3>Chủ đề: Di truyền học</h3>
+            <span class="tag">Sinh học</span>
+            <p class="lesson-name"><strong>Bài: Tách chiết DNA (Dự án STEM)</strong></p>
+            <p>Tài liệu hướng dẫn học sinh thực hiện các dự án học tập, thực hành tách chiết DNA đơn giản.</p>
+            <div class="btn-group">
+                <a href="DÁN_LINK_PHIẾU_HỌC_TẬP_VÀO_ĐÂY" target="_blank" class="btn btn-info">📂 Phiếu học tập dự án</a>
+                <a href="DÁN_LINK_VIDEO_YOUTUBE_VÀO_ĐÂY" target="_blank" class="btn btn-sim">🌐 Video hướng dẫn</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Sản phẩm thuộc Sáng kiến kinh nghiệm - Môn Khoa học tự nhiên 9 (Bộ Kết nối tri thức)</p>
+        <p class="author-credit">Thiết kế và xây dựng bởi: Giáo viên Nguyễn Xuân Sinh - Trường THCS Hoàng Văn Thụ</p>
+    </footer>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.card');
+
+        function filterLessons() {
+            const searchText = searchInput.value.toLowerCase();
+            const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+
+            cards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                const lessonName = card.querySelector('.lesson-name').innerText.toLowerCase();
+
+                const matchesCategory = (activeFilter === 'all' || activeFilter === cardCategory);
+                const matchesSearch = lessonName.includes(searchText);
+
+                if (matchesCategory && matchesSearch) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        searchInput.addEventListener('input', filterLessons);
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                filterLessons();
+            });
+        });
+    </script>
+</body>
+</html>
